@@ -1,0 +1,13 @@
+<div class="header drag">
+    <div class="header__section">
+        <div class="header__logotype"></div>
+        <div class="header__title">{{ navigationService.getNavigationConfig()?.title }}</div>
+    </div>
+
+    <div class="header__section">
+        <div class="header__controls">
+            <div class="header__controls__item controls-hide no-drag" (click)="hide()"></div>
+            <div class="header__controls__item controls-exit no-drag" (click)="exit()"></div>
+        </div>
+    </div>
+</div>

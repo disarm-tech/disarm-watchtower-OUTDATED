@@ -1,0 +1,59 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  color: white;
+  font-size: 18px;
+  line-height: 1.24;
+  font-family: Roboto, sans-serif;
+  font-weight: normal;
+  user-select: none;
+  outline: none;
+}
+
+.drag {
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  overflow: auto;
+
+  .modal-body {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+  }
+
+  .modal-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 20px;
+    z-index: 11;
+  }
+
+  .modal-overlay {
+    display: flex;
+    position: relative;
+    margin: 0 auto;
+    z-index: 11;
+  }
+}

@@ -1,0 +1,14 @@
+<div class="main-process">
+    <div class="main-process__icon"></div>
+    <div class="main-process__text">{{ process.title }}</div>
+    <div class="main-process__status">{{ status }} / {{ statusMax }}</div>
+    <div class="main-process__progress" [class.shown]="progress">
+        <ng-container *ngIf="progress">
+            <div class="main-process__progress__fill" [style.width]="progressFill"></div>
+            <div class="main-process__progress__container">
+                <div class="main-process__progress__label">{{ progress.step }} / {{ progress.stepsRemain }}</div>
+                <div class="main-process__progress__label timings">Time remain: {{ progress.timeRemain }}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>
