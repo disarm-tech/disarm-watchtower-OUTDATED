@@ -18,6 +18,7 @@ import { FileSystemIpc } from '@shared/modules/file-system/file-system.enum';
 })
 export class MatchImagesComponent implements OnInit {
   matches?: MatchImages[];
+  showOnlyMatches = true;
 
   constructor(
     private navigationService: NavigationService,

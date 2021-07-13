@@ -33,7 +33,7 @@ export class MainProcessService {
     }
 
     if (typeof process.ipcProgress !== 'undefined') {
-      electron.ipcRenderer.once(
+      electron.ipcRenderer.on(
         process.ipcProgress,
         (event, chunk: MainProcessProgress) => {
           this.zone.run(() => {
@@ -46,6 +46,10 @@ export class MainProcessService {
     if (typeof process.ipcResponse !== 'undefined') {
       electron.ipcRenderer.once(process.ipcResponse, (event, response) => {
         this.zone.run(() => {
+          if (process.ipcProgress) {
+            electron.ipcRenderer.removeAllListeners(process.ipcProgress);
+          }
+
           this.handle(response);
           this.next();
         });

@@ -1,41 +1,50 @@
 <div class="match-images" *ngIf="matches">
-    <div class="match-images__item">
-        <div class="match-images__item__back" (mousedown)="selectorFolders()">
-            <div class="match-images__item__back__icon"></div>
-            <div class="match-images__item__back__label">Select other directories</div>
-        </div>
+    <div class="match-images__options">
+        <div class="match-images__options__option"
+             (mousedown)="showOnlyMatches = !showOnlyMatches"
+             [class.active]="showOnlyMatches">Show only matches</div>
     </div>
-
-    <div class="match-images__item" *ngFor="let match of matches">
-        <div class="match-images__item__preview"
-             [class.opened]="match.showDetails"
-             (mousedown)="toggleDetails(match)">
-
-            <img class="match-images__item__preview__original" [src]="localImage(match.originalPath)">
-            <div class="match-images__item__preview__footer">
-                <div class="match-images__item__preview__footer__detail"></div>
-                <div class="match-images__item__preview__footer__matches">{{ match.matches }} matches</div>
+    <div class="match-images__items">
+        <div class="match-images__item">
+            <div class="match-images__item__back" (mousedown)="selectorFolders()">
+                <div class="match-images__item__back__icon"></div>
+                <div class="match-images__item__back__label">Select other directories</div>
             </div>
         </div>
 
-        <div class="match-images__item__detail"
-             [class.opened]="match.showDetails">
+        <ng-container *ngFor="let match of matches">
+            <div class="match-images__item" *ngIf="(showOnlyMatches && match.matches > 0) || !showOnlyMatches">
+                <div class="match-images__item__preview"
+                     [class.opened]="match.showDetails"
+                     (mousedown)="toggleDetails(match)">
 
-            <ng-container *ngIf="match.showDetails">
-                <div class="match-images__item__detail__directory" *ngFor="let directory of match.directories | entries">
-                    <div class="match-images__item__detail__directory__path">{{ directory[0] }}</div>
-                    <div class="match-images__item__detail__directory__items">
-                        <div class="match-images__item__detail__directory__items__image"
-                             [style.background-image]="localImage(image, true)"
-                             *ngFor="let image of directory[1]">
-
-                            <div class="match-images__item__detail__directory__items__image__button"
-                                 *ngIf="match.matches"
-                                 (click)="leaveImage(match, image)">Leave this</div>
-                        </div>
+                    <img class="match-images__item__preview__original" [src]="localImage(match.originalPath)">
+                    <div class="match-images__item__preview__footer">
+                        <div class="match-images__item__preview__footer__detail"></div>
+                        <div class="match-images__item__preview__footer__matches">{{ match.matches }} matches</div>
                     </div>
                 </div>
-            </ng-container>
-        </div>
+
+                <div class="match-images__item__detail"
+                     [class.opened]="match.showDetails">
+
+                    <ng-container *ngIf="match.showDetails">
+                        <div class="match-images__item__detail__directory" *ngFor="let directory of match.directories | entries">
+                            <div class="match-images__item__detail__directory__path">{{ directory[0] }}</div>
+                            <div class="match-images__item__detail__directory__items">
+                                <div class="match-images__item__detail__directory__items__image"
+                                     [style.background-image]="localImage(image, true)"
+                                     *ngFor="let image of directory[1]">
+
+                                    <div class="match-images__item__detail__directory__items__image__button"
+                                         *ngIf="match.matches"
+                                         (click)="leaveImage(match, image)">Leave this</div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
     </div>
 </div>

@@ -6,12 +6,42 @@
 
   .match-images {
     display: grid;
-    position: relative;
-    grid-gap: 20px;
-    grid-template-columns: repeat(4, 200px);
-    padding: 0 20px 20px;
+    grid-gap: 15px;
+    grid-template-rows: max-content max-content;
 
-    .match-images__item {
+    .match-images__options {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: max-content;
+      padding: 0 20px;
+
+      .match-images__options__option {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        min-width: 200px;
+        background-color: #202020;
+        box-sizing: border-box;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: #222222;
+        }
+
+        &.active {
+          color: black;
+          background-color: #4EDFAE;
+        }
+      }
+    }
+
+    .match-images__items {
+      display: grid;
+      position: relative;
+      grid-gap: 20px;
+      grid-template-columns: repeat(4, 200px);
+      padding: 0 20px 20px;
 
       .match-images__item__back {
         display: grid;
