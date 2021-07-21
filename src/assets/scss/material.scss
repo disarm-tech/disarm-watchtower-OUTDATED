@@ -1,0 +1,50 @@
+@use '~@angular/material' as mat;
+
+// Include non-theme styles for core.
+@include mat.core();
+
+// Disarm color palette
+$md-disarm: (
+  50 : #eafbf5,
+  100 : #caf5e7,
+  200 : #a7efd7,
+  300 : #83e9c6,
+  400 : #69e4ba,
+  500 : #4edfae,
+  600 : #47dba7,
+  700 : #3dd79d,
+  800 : #35d294,
+  900 : #25ca84,
+  A100 : #ffffff,
+  A200 : #d3ffeb,
+  A400 : #a0ffd4,
+  A700 : #86ffc9,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+// Define a theme.
+$palette: mat.define-palette($md-disarm);
+$theme: mat.define-dark-theme((
+  color: (
+    primary: $palette,
+    accent: $palette,
+  )
+));
+
+// Include all theme styles for the components.
+@include mat.all-component-themes($theme);

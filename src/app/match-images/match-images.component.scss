@@ -1,0 +1,237 @@
+@import "../../assets/scss/base";
+
+:host {
+  display: flex;
+  flex-grow: 1;
+
+  .match-images {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-rows: max-content max-content;
+
+    .match-images__options {
+      display: grid;
+      grid-gap: 15px;
+      grid-template-columns: repeat(auto-fill, minmax(25%, max-content));
+      padding: 0 20px;
+
+      .match-images__options__option {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: max-content max-content;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        min-width: 200px;
+        background-color: #202020;
+        box-sizing: border-box;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: #222222;
+        }
+
+        &.active {
+          color: black;
+          background-color: #4EDFAE;
+
+          &.icon-matches:before {
+            background-color: black;
+          }
+        }
+
+        &:before {
+          content: '';
+          display: block;
+          width: 20px;
+          height: 20px;
+        }
+
+        &.icon-matches:before {
+          background-color: white;
+          @include maskImage(url('../../assets/images/icons/search-image.svg'))
+        }
+        &.icon-back:before {
+          @include backgroundImage(url('../../assets/images/icons/folder-fill.svg'))
+        }
+      }
+    }
+
+    .match-images__items {
+      display: grid;
+      position: relative;
+      grid-gap: 20px;
+      grid-template-columns: repeat(4, 200px);
+      padding: 0 20px 20px;
+
+      .match-images__item__preview {
+        display: grid;
+        grid-template-rows: max-content max-content;
+        transition: border 500ms ease;
+        background-color: #202020;
+        border-radius: 10px;
+        cursor: pointer;
+        overflow: hidden;
+
+        &.opened {
+          position: relative;
+          z-index: 2;
+          box-shadow: 0 0 0 1px rgba(78, 223, 174, 0.7);
+
+          .match-images__item__preview__footer__detail {
+            transform: rotate(180deg) !important;
+          }
+        }
+
+        .match-images__item__preview__original {
+          width: 100%;
+          height: 120px;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .match-images__item__preview__footer {
+          display: grid;
+          grid-gap: 8px;
+          grid-template-columns: max-content 1fr;
+          padding: 0 12px;
+          align-items: center;
+          min-height: 30px;
+          max-height: 30px;
+
+          .match-images__item__preview__footer__detail {
+            width: 15px;
+            height: 11px;
+            transform: rotate(0);
+            transition: transform 500ms ease;
+            @include backgroundImage(url('../../assets/images/icons/arrow-stroke.svg'));
+          }
+
+          .match-images__item__preview__footer__matches {
+            font-size: 13px;
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      .match-images__item__detail {
+        display: grid;
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 0;
+        padding: 0;
+        grid-gap: 30px;
+        background-color: #202020;
+        border: 1px solid rgba(78, 223, 174, 0.7);
+        border-radius: 20px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1;
+
+        &.opened {
+          padding: 30px;
+          height: unset;
+          transform: translateY(20px);
+          pointer-events: auto;
+          opacity: 1;
+        }
+
+        .match-images__item__detail__group {
+          display: grid;
+          grid-gap: 20px;
+          grid-template-rows: max-content max-content;
+
+          .match-images__item__detail__group__name {
+            display: grid;
+            grid-gap: 10px;
+            grid-template-columns: max-content 1fr;
+            align-items: center;
+            font-size: 16px;
+
+            &:before {
+              content: '';
+              display: block;
+              width: 20px;
+              height: 20px;
+              background-color: #4EDFAE;
+              @include maskImage(url('../../assets/images/icons/groups.svg'))
+            }
+          }
+
+          .match-images__item__detail__group__directories {
+            display: grid;
+            grid-gap: 20px;
+            padding-top: 20px;
+            padding-left: 20px;
+            border-top: 1px solid #292929;
+
+            .match-images__item__detail__group__directories__directory {
+              display: grid;
+              grid-gap: 15px;
+              grid-template-rows: max-content max-content;
+
+              .match-images__item__detail__group__directories__directory__name {
+                display: grid;
+                grid-gap: 10px;
+                grid-template-columns: max-content 1fr;
+                align-items: center;
+                font-size: 16px;
+
+                &:before {
+                  content: '';
+                  display: block;
+                  width: 20px;
+                  height: 20px;
+                  @include backgroundImage(url('../../assets/images/icons/folder-fill.svg'))
+                }
+              }
+
+              .match-images__item__detail__group__directories__directory__images {
+                display: grid;
+                grid-gap: 20px;
+                grid-template-columns: repeat(3, 252px);
+
+                .match-images__item__detail__group__directories__directory__images__image {
+                  display: flex;
+                  position: relative;
+                  justify-content: center;
+                  width: 100%;
+                  height: 200px;
+                  background-repeat: no-repeat;
+                  background-position: center;
+                  background-size: cover;
+                  border: 1px solid black;
+                  border-radius: 10px;
+
+                  &:hover .match-images__item__detail__group__directories__directory__images__image__button {
+                    opacity: 1;
+                    pointer-events: auto;
+                    bottom: -10px;
+                  }
+
+                  .match-images__item__detail__group__directories__directory__images__image__button {
+                    display: flex;
+                    position: absolute;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 3px 6px;
+                    bottom: 10px;
+                    color: black;
+                    font-size: 14px;
+                    transition: bottom 200ms ease, opacity 200ms ease;
+                    background-color: #4EDFAE;
+                    border-radius: 5px;
+                    pointer-events: none;
+                    opacity: 0;
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

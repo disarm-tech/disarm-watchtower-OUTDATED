@@ -5,13 +5,7 @@ import { OpenDialogReturnValue } from 'electron';
 
 @Injectable()
 export class SelectorFoldersService {
-  data?: OpenDialogReturnValue;
-
   constructor(private zone: NgZone) {}
-
-  public reset() {
-    this.data = undefined;
-  }
 
   public selectFolders(): Promise<OpenDialogReturnValue> {
     return new Promise((resolve) => {
@@ -20,15 +14,10 @@ export class SelectorFoldersService {
         SelectorFoldersIpc.SELECT_FOLDER_RESPONSE,
         (event, data: OpenDialogReturnValue) => {
           this.zone.run(() => {
-            this.data = data;
             resolve(data);
           });
         }
       );
     });
-  }
-
-  public getLastSelection() {
-    return this.data;
   }
 }

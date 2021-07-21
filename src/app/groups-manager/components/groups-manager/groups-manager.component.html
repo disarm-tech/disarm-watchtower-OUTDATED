@@ -1,0 +1,32 @@
+<div class="groups-manager">
+    <div class="groups-manager__header">
+        <div class="groups-manager__header__title">Prepare folders</div>
+    </div>
+    <div class="groups-manager__content">
+        <div class="groups-manager__group" (mousedown)="selectFolders(group)" *ngFor="let group of groupsManagerService.all(); let index = index;">
+            <div class="groups-manager__group__remove"
+                 *ngIf="groupsManagerService.all().length > 1 || groupHaveFolders(group)"
+                 (mousedown)="deleteGroup(index)"></div>
+
+            <div class="groups-manager__group__icon" [style.background-image]="image(group.icon) | safe: 'style'"></div>
+            <div class="groups-manager__group__label">{{ group.label }}</div>
+        </div>
+        <div class="groups-manager__group" (mousedown)="newGroup()">
+            <div class="groups-manager__group__icon" [style.background-image]="image(addGroupTemplate.icon) | safe: 'style'"></div>
+            <div class="groups-manager__group__label">{{ addGroupTemplate.label }}</div>
+        </div>
+    </div>
+    <div class="groups-manager__footer">
+        <div class="groups-manager__footer__options">
+            <div class="groups-manager__footer__options__option">
+                <div class="groups-manager__footer__options__option__label">Acceptable match percentage</div>
+                <mat-slider class="groups-manager__footer__options__option__item" thumbLabel min="0.1" max="1" step="0.01" [(value)]="matchProcessService.minThreshold"></mat-slider>
+            </div>
+        </div>
+        <div class="groups-manager__footer__actions">
+            <div class="groups-manager__footer__actions__button icon-find-image"
+                 (mousedown)="runJob()"
+                 [class.disabled]="groupsManagerService.completed().length < 1 ">Find image duplications</div>
+        </div>
+    </div>
+</div>

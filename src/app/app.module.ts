@@ -9,8 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxElectronModule } from 'ngx-electron';
 import { ModalityModule } from '@app/modality/modality.module';
 import { SelectorFoldersModule } from '@app/selector-folders/selector-folders.module';
-import { MainProcessModule } from '@app/main-process/main-process.module';
+import { MatchProcessModule } from '@app/match-process/match-process.module';
 import { MatchImagesModule } from '@app/match-images/match-images.module';
+import { GroupsManagerModule } from '@app/groups-manager/groups-manager.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { MatchImagesModule } from '@app/match-images/match-images.module';
     NavigationModule,
     ModalityModule,
     SelectorFoldersModule,
-    MainProcessModule,
+    GroupsManagerModule,
+    MatchProcessModule,
     MatchImagesModule,
   ],
   providers: [],

@@ -5,3 +5,10 @@
   background-repeat: $repeat;
   background-position: $position;
 }
+
+@mixin maskImage($image, $size: contain, $position: center, $repeat: no-repeat) {
+  mask-image: $image;
+  mask-size: $size;
+  mask-repeat: $repeat;
+  mask-position: $position;
+}

@@ -1,0 +1,13 @@
+<div class="match-process">
+    <div class="match-process__icon"></div>
+    <div class="match-process__text">Searching duplications... This may take some time...</div>
+    <div class="match-process__progress" [class.shown]="progress">
+        <ng-container *ngIf="progress">
+            <div class="match-process__progress__fill" [style.width]="progressFill"></div>
+            <div class="match-process__progress__container">
+                <div class="match-process__progress__label">{{ progress.step }} / {{ progress.stepsRemain }}</div>
+                <div class="match-process__progress__label timings">Time remain: {{ progress.timeRemain }}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>

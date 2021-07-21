@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '@app/layout/layout/layout.component';
-import { SelectorFoldersComponent } from '@app/selector-folders/selector-folders/selector-folders.component';
-import { MainProcessComponent } from '@app/main-process/main-process/main-process.component';
-import { MatchImagesComponent } from '@app/match-images/match-images/match-images.component';
+import { MatchProcessComponent } from '@app/match-process/match-process.component';
+import { MatchImagesComponent } from '@app/match-images/match-images.component';
+import { GroupsManagerComponent } from '@app/groups-manager/components/groups-manager/groups-manager.component';
 
 const routes: Routes = [
   {
@@ -12,11 +12,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: SelectorFoldersComponent,
+        component: GroupsManagerComponent,
       },
       {
         path: 'process',
-        component: MainProcessComponent,
+        component: MatchProcessComponent,
       },
       {
         path: 'match-images',

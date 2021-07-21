@@ -71,7 +71,7 @@ class Core {
       (
         await this.mainWindow.createWindow(LoadURI, {
           width: 900,
-          height: 600,
+          height: 800,
           frame: false,
           resizable: false,
           maximizable: false,
@@ -131,7 +131,9 @@ class Core {
 
   closeApplication() {
     console.log('[Core]: [closeApplication]: Quit requested');
-    this.mainWindow.closeWindow();
+    if (this.mainWindow) {
+      this.mainWindow.closeWindow();
+    }
   }
 }
 
