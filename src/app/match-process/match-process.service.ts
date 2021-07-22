@@ -10,6 +10,7 @@ import { MatchProcessProgress } from '@shared/modules/match-process/match-proces
 import { GroupsManagerService } from '@app/groups-manager/groups-manager.service';
 import { Router } from '@angular/router';
 import * as path from 'path';
+import { slash } from '@shared/tools';
 
 @Injectable()
 export class MatchProcessService {
@@ -45,20 +46,37 @@ export class MatchProcessService {
         return true;
       };
 
+      /**
+       * Searches for matches between A and B.
+       * This is necessary to filter matches images by their groups.
+       * The function also fixes a bug with slashes in the Win32 path.
+       * @param a
+       * @param b
+       */
+      const checkBelongGroup = (a: string, b: string) => {
+        return slash(a).match(slash(b));
+      };
+
       for (const group of availableGroups) {
-        let groupMatch = false;
+        let stopSignal = false;
 
         for (const groupFolder of group.folders?.filePaths || []) {
-          if (match[0].match(groupFolder) && !groupMatch) {
+          if (checkBelongGroup(match[0], groupFolder) && !stopSignal) {
             groupsPush(group.label, match[0]);
-            if (availableGroups.length > 1) groupMatch = true;
+
+            /** !!!
+             * Used to prevent matches from being displayed in each group.
+             * Because we are comparing groups with each other.
+             * Otherwise default mode, handle all matches.
+             */
+            if (availableGroups.length > 1) stopSignal = true;
           }
 
           for (const matchImage of match[1]) {
-            if (matchImage.match(groupFolder) && !groupMatch) {
+            if (checkBelongGroup(matchImage, groupFolder) && !stopSignal) {
               if (groupsPush(group.label, matchImage)) {
                 matches++;
-                if (availableGroups.length > 1) groupMatch = true;
+                if (availableGroups.length > 1) stopSignal = true;
               }
             }
           }

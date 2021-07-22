@@ -93,6 +93,7 @@ class WindowManager {
    * Request window close
    */
   public closeWindow(): void {
+    this.browserWindow?.webContents.closeDevTools();
     this.browserWindow?.close();
   }
 }
